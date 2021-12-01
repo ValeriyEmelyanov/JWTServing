@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/db_jwtserving
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: false
+  sql:
+    init:
+      mode: always
+      platform: postgresql
