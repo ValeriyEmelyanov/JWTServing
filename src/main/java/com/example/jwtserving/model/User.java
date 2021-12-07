@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -23,6 +24,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -45,7 +47,7 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private boolean enabled;
+    private boolean enable;
 
     @Column(updatable = false)
     @CreationTimestamp
@@ -59,5 +61,11 @@ public class User {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    public Set<GrantedAuthority> getAuthorities() {
+        return roles.stream()
+                .flatMap(role -> role.getAuthorities().stream())
+                .collect(Collectors.toSet());
+    }
 
 }

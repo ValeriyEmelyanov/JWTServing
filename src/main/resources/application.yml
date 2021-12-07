@@ -12,3 +12,6 @@ spring:
     init:
       mode: always
       platform: postgresql
+jwt:
+  secret: 2dfe2sd45xqe34z9je4
+  duration: 5
