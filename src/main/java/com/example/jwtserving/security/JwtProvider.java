@@ -49,11 +49,11 @@ public class JwtProvider {
 
     public boolean validateToken(String token) {
         try {
-            log.error("Token is successfully validated");
+            log.info("Token is successfully validated");
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
             return true;
         } catch (ExpiredJwtException e) {
-            log.info("Token expired");
+            log.error("Token expired");
         } catch (UnsupportedJwtException e) {
             log.error("Unsupported jwt");
         } catch (MalformedJwtException e) {
