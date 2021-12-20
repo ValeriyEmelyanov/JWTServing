@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/admin")
 public class AdminResource {
@@ -16,7 +18,7 @@ public class AdminResource {
 
     @PreAuthorize(PERMISSION_ADMIN_READ)
     @GetMapping
-    public ResponseEntity<String> info() {
+    public ResponseEntity<String> info(Principal principal) {
         return ResponseEntity.ok("Info from the Admin resource");
     }
 
